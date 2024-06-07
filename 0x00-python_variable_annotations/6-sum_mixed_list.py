@@ -2,9 +2,10 @@
 """
 Type annotated function
 """
+from typing import List
 
 
-def sum_mixed_list(mxd_lst: list[int | float]) -> float:
+def sum_mixed_list(mxd_lst: List[int | float]) -> float:
     """
     Returns sum
     """
