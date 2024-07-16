@@ -12,7 +12,7 @@ class TestAccessNestedMap(unittest.TestCase):
     """
     This class tests the Nested Map functions
     """
-    @parameteized.expand([
+    @parameterized.expand([
         ({"a": 1}, ("a",), 1),
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
         ({"a": {"b": 2}}, ("a", "b"), 2),
