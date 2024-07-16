@@ -4,7 +4,7 @@ A module testing python framework
 """
 import unittest
 from parameterized import parameterized
-from utils import access_nested_map, get_json
+from utils import access_nested_map, get_json, memoize
 from typing import Dict, Tuple, Union
 from unittest.mock import patch, Mock
 
@@ -72,3 +72,43 @@ class TestGetJson(unittest.TestCase):
             mock_get.assert_called_once_with(test_url)
 
             self.assertEqual(result, test_payload)
+
+
+class TestMemoize(unittest.TestCase):
+    """
+    Tests the `memoize` function.
+    """
+    class TestClass:
+        """
+        Class to test Memoize
+        """
+
+        def a_method(self):
+            """
+            A simple method that returns 42
+            """
+            return 42
+
+        @memoize
+        def a_property(self):
+            """
+            A memoized property that calls a_method
+            """
+            return self.a_method()
+
+        def test_memoize(self):
+            """
+            Test momoized decorator
+            """
+            test_instance = self.TestClass()
+
+            with patch.object(
+                    self.TestClass, 'a_method', return_value=42
+            ) as mock_method:
+                result1 = test_instance.a_property
+                result2 = test_instance.a_property
+
+                self.assertEqual(result1, 42)
+                self.assertEqual(result2, 42)
+
+                mock_method.assert_called_once()
