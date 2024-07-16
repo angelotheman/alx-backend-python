@@ -3,7 +3,7 @@
 A module testing python framework
 """
 import unittest
-from parametized import parametized
+from parameterized import parameterized
 from utils import access_nested_map
 from typing import Dict, Tuple, Union
 
@@ -12,7 +12,7 @@ class TestAccessNestedMap(unittest.TestCase):
     """
     This class tests the Nested Map functions
     """
-    @parametized.expand([
+    @parameteized.expand([
         ({"a": 1}, ("a",), 1),
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
         ({"a": {"b": 2}}, ("a", "b"), 2),
