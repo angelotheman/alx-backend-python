@@ -27,3 +27,18 @@ class TestAccessNestedMap(unittest.TestCase):
         Testing the access nested map
         """
         self.assertEqual(access_nested_map(nested_map, path), expected)
+
+    @parameterized.expand([
+        ({}, ("a",)),
+        ({"a": 1}, ("a", "b")),
+    ])
+    def test_access_nested_map_exception(
+            self,
+            nested_map: Dict,
+            path: Tuple[str]
+    ) -> None:
+        """
+        Testing with access_nested_map raises KeyError appropriately
+        """
+        with self.assertRaises(exception):
+            access_nested_map(nested_map, path)
